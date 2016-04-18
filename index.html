@@ -2,14 +2,15 @@
 <html>
     
     <head>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <title>Shopping List</title>
+        <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+        
     </head>
     
     <body>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         
-        
-        <script type="text/javascript" src="">
+        <script type="text/javascript">
             var app = angular.module("myShoppingList",[]);
             
             app.controller("myCtrl", function($scope){
@@ -19,6 +20,7 @@
                     if (!$scope.addMe) {return;}
                     if ($scope.products.indexOf($scope.addMe) == -1){
                         $scope.products.push($scope.addMe);
+                        $scope.addMe = "";
                     } else{
                         $scope.errortext = "The item is already in your shopping list.";
                     }
@@ -30,16 +32,19 @@
             });
         </script>
         
-        <div ng-app="myShoppingList" ng-controller="myCtrl">
+        <div class="main" ng-app="myShoppingList" ng-controller="myCtrl">
+            <h3>My Shopping List</h3>
             <ul>
                 <li ng-repeat="item in products">
                     {{ item }}
                     <span ng-click="removeItem($index)" >&times;</span>
                 </li>
             </ul>
-            <input ng-model="addMe"/>
-            <button ng-click="addIem">Add</button>
+            <div class="add-section">
+            <input placeholder="Add shopping items here" ng-model="addMe"/>
+            <button ng-click="addItem()">Add</button>
             <p> {{ errortext }} </p>
+            </div>
         </div>
     
     </body>
